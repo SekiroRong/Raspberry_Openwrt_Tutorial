@@ -52,9 +52,9 @@ V2ray是啥，懂得都懂，不懂的请自行百度，简而言之就是科学
 
 * https://github.com/kuoruan/luci-app-v2ray
 
-  进Release Page                         ![image-20210819114826842](C:\Users\sekiro\AppData\Roaming\Typora\typora-user-images\image-20210819114826842.png)
+  进Release Page                         ![QQ图片20210819115805.png](https://i.loli.net/2021/08/19/LseQYlM647RumhJ.png)
 
-  下载两个ipk备用       ![image-20210819114925511](C:\Users\sekiro\AppData\Roaming\Typora\typora-user-images\image-20210819114925511.png)
+  下载两个ipk备用       ![QQ图片20210819115810.png](https://i.loli.net/2021/08/19/97VAlu5O3Yyzbxa.png)
 
 * 使用WinSCP工具https://winscp.net/eng/download.php （教程请另行搜索）将两个ipk传到/tmp目录下
 
@@ -78,4 +78,4 @@ V2ray是啥，懂得都懂，不懂的请自行百度，简而言之就是科学
 
 * 接下来就自由发挥吧
 
-  ![image-20210819115534901](C:\Users\sekiro\AppData\Roaming\Typora\typora-user-images\image-20210819115534901.png)
+  ![QQ图片20210819115814.png](https://i.loli.net/2021/08/19/TY8FtsG59wAyaXI.png)
