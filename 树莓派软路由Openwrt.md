@@ -125,3 +125,64 @@ opkg update
 
 
 * 这样就成功了！![在这里插入图片描述](https://img-blog.csdnimg.cn/507415f8bb53422dbf16f365c9eb243c.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTExMTYxMw==,size_16,color_FFFFFF,t_70#pic_center)
+
+# 数据同步syncthing
+
+俗话说的好，一个好汉三个桩，一个篱笆三个帮。有些重要数据存放在单一的硬盘中，如果硬盘出了什么catastrophe的话，就不继续往下说了。
+
+今天我们来部署的是syncthing，一个几乎能在所有平台上使用的**同步备份软件**。
+
+## Openwrt上部署
+
+进openwrt网关（192.168.1.254），网络储存-储存同步-启用（默认的8384口无需修改）
+
+ssh到openwrt，登陆后键入syncthing就启动了。
+
+打开我们同一局域网下的电脑（或手机或不管什么设备）在浏览器中192.168.1.254:8384就进入syncthing的网页管理端了。
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/6c9b54db58f74a17a20e65ac0e5d3e35.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTExMTYxMw==,size_16,color_FFFFFF,t_70#pic_center)
+
+
+使用方法也很简单，切换成你的语言，创建设置用户与密码（为了安全），添加远程设备，添加需要共享的文件夹。
+
+只需要双方互为远程设备，且一方接受另一方的共享文件夹即可完成共享。
+
+## Windows部署
+
+https://github.com/canton7/SyncTrayzor/releases直接下载软件运行，设置方法同上。
+
+## Android部署
+
+谷歌商店直接搜Syncthing，设置方法同上。
+
+## Linux云服务器部署
+
+https://apt.syncthing.net/ 官方教程，别忘了防火墙开放端口8384，21025，22000
+
+![请添加图片描述](https://img-blog.csdnimg.cn/cce7c790ab0c450fbbba30d39c6731f9.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTExMTYxMw==,size_16,color_FFFFFF,t_70)
+
+
+第一次启动后会生成/root/.config/syncthing/ 用于保存配置文件以及证书、密钥(包括https证书、密钥)
+
+vim /root/.config/syncthing/config.xml
+
+把127.0.0.1:8384修改为0.0.0.0:8384
+
+才能在浏览器中访问IP:8384。
+
+# 内网穿透ZeroTier
+
+zerotier这么好用的内网穿透软件相信很多人都接触过，网上教程也很多。
+
+那我就来整个有点不一样的：zerotier部署在Openwrt上，局域网内设备都能自动连上zerotier。
+
+
+
+* 还是Openwrt网关，ZeroTier-启用-输入你zerotier的ID，勾选‘自动允许客户端 NAT’-保存&应用
+
+* 浏览器进zerotier-center，同意我们的路由器加入，等待zerotier给路由器自动分配的IP
+
+* 然后到Advanced那栏![请添加图片描述](https://img-blog.csdnimg.cn/270b45deb07a40ce90e7e6bce6d16957.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTExMTYxMw==,size_16,color_FFFFFF,t_70)
+
+
+  右边填zerotier给路由器自动分配的IP，左边填192.168.1.0/24，然后submit就大功告成了
